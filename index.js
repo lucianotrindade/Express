@@ -3,13 +3,19 @@
 const express = require('express');
 const app = express();
 
+const saudacao = require('./trabalhandoComMiddleware');
+
+app.use(saudacao('Luciano'));
+
 //Depois da requisição retornamos um Json 
-app.use('/home', (req, res) => {
+app.use('/home', (req, res, next) => {
     res.json({
         nome: 'Ana Luiza',
         idade: 39,
         sexo: "F"
     });
+//Next serve para chamar a proxima função.
+    next();
 });
 
 //Iniciando um servidor na porta 3000
